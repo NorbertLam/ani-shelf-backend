@@ -1,15 +1,12 @@
 module Types
-  class QueryType < Types::BaseObject
+  class QueryType < BaseObject
+    # queries are just represented as fields
+    # `all_links` is automatically camelcased to `allLinks`
+    field :all_links, [LinkType], null: false
 
-    Types::QueryType = GraphQL::ObjectType.define do 
-      name:"Query"
-
-      field :media !types[Types::MediaType] do
-        resolve -> {obj, args, ctx}{
-          Media.all
-        }
-    
-      end
+    # this method is invoked, when `all_link` fields is beeing resolved
+    def all_links
+      Link.all
     end
   end
 end
