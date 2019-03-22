@@ -1,4 +1,4 @@
-class AniShelfSchema < GraphQL::Schema
+class AniShelfBackendSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
 end
