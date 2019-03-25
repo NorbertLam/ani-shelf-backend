@@ -6,10 +6,17 @@ class AuthController < ApplicationController
 
     if @user && @user.authenticate(user_login_params[:password])
       token = encode_token({ user_id: @user.id })
-      render json: { user: @user.id, jwt: token }, status: :accepted
+      render json: { user: UserSerializer.new(@user), jwt: token }, status: :accepted
     else
       render json: { message: 'Invalid email or password' }, status: :unauthorized
     end
+  end
+
+  def show
+    jwt = request.headers['Authorization']
+    id = JWT.decode(jwt, "supersecrete")[0]["user_id"]
+    @user = User.find(id)
+    render json: {user: UserSerializer.new(@user)}
   end
  
   private
