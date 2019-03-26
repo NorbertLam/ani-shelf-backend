@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get '/current_user', to: 'auth#show'
   post '/favorites', to: "favorites#create"
   get '/hearts', to: "favorites#show"
+  delete '/unheart/:id', to: "favorites#destroy"
 end
