@@ -16,7 +16,7 @@ class AuthController < ApplicationController
     jwt = request.headers['Authorization']
     id = JWT.decode(jwt, "supersecrete")[0]["user_id"]
     @user = User.find(id)
-    render json: {user: UserSerializer.new(@user)}
+    render json: {user: @user}
   end
  
   private

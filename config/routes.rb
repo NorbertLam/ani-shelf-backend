@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   get '/animes', to: "animes#index"
   post '/login', to: "auth#create"
   get '/current_user', to: 'auth#show'
+  post '/favorites', to: "favorites#create"
+  get '/hearts', to: "favorites#show"
 end
